@@ -1,6 +1,12 @@
 //criando/declarando a função tocaSom com parâmetro idElementoAudio
 function tocaSom(idElementoAudio){
-    document.querySelector(idElementoAudio).play();
+    const elemento = document.querySelector(idElementoAudio);
+    if (elemento && elemento.localName === 'audio'){
+     elemento.play();
+    }else{
+        console.log('Elemento inválido ou não encontrado')
+    }
+   
 }
 const ListaDeteclas = document.querySelectorAll('.tecla');
 //Criando refeerência variável contador, atribuindo o valor inicial como "0"
@@ -14,5 +20,13 @@ for(let contador = 0;contador < ListaDeteclas.length;contador++){
         tocaSom(idAudio);
     }
 
+    }
+    tecla.onkeydown = function(evento){ //função para tecla pressionada
+        if(evento.code === 'Space'|| evento.code === 'Enter'){
+            tecla.classList.add('ativa');
+        }
+    }
+    tecla.onkeyup = function(){ //função para tecla despressionada
+        tecla.classList.remove('ativa');
+    }
 }
-
